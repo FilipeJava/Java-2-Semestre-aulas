@@ -15,19 +15,19 @@ public class Dao {
 
 	
 	
-	public void incluir(Personagem personagem) {
+	public void incluirPersonagem(Personagem personagem) {
 
 		this.personagem.add(personagem);
 
 	}
 
-	public void incluir(Atributo atributo) {
+	public void incluirAtributo(Atributo atributo) {
 
 		this.atributo.add(atributo);
 
 	}
 
-	public void incluir(Item item) {
+	public void incluirItem(Item item) {
 
 		this.item.add(item);
 
@@ -35,7 +35,19 @@ public class Dao {
 	
 	
 	
-	public void excluir ( int id) {
+	
+	
+	
+	public List<Atributo> getAtributo() {
+		return atributo;
+	}
+
+	public List<Item> getItem() {
+		return item;
+	}
+
+	// método de exclusão por id de Persnagem 
+	public void excluirPersoangem ( int id) {
 		for (int i = 0; i < this.personagem.size(); i++) {
 			if (this.personagem.get(i).getId()==id) {
 				this.personagem.remove(i);
@@ -51,4 +63,4 @@ public class Dao {
 	
 	
 
-}
+}//class

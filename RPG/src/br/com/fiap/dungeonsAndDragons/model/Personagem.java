@@ -3,14 +3,16 @@ package br.com.fiap.dungeonsAndDragons.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.fiap.dungeonsAndDragons.dao.Dao;
 
-public class Personagem extends Dao {
+
+	
+public class Personagem {
 	
 	private int id;
 	private String nome;
 	private String raca;
 	private String classe;
+	private String guilda;
 	private int experiencia;
 	private int level;
 	private List<Atributo> listaAtributo = new ArrayList<>();
@@ -18,30 +20,36 @@ public class Personagem extends Dao {
 	
 	
 	
+
 	//costrutor padrao
-	public Personagem() {
-		
-	}
+		public Personagem() {
+			
+		}
 	
 	
 	// construtor com fields
-	public Personagem(int id, String nome, String raca, String classe, int experiencia, int level,
+
+		
+
+	//getters and setters
+	
+	public int getId() {
+		return id;
+	}
+
+
+	public Personagem(int id, String nome, String raca, String classe, String guilda, int experiencia, int level,
 			List<Atributo> listaAtributo, List<Item> inventario) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.raca = raca;
 		this.classe = classe;
+		this.guilda = guilda;
 		this.experiencia = experiencia;
 		this.level = level;
 		this.listaAtributo = listaAtributo;
 		this.inventario = inventario;
-	}
-
-	//getters and setters
-	
-	public int getId() {
-		return id;
 	}
 
 
@@ -117,6 +125,16 @@ public class Personagem extends Dao {
 
 	public void setInventario(List<Item> inventario) {
 		this.inventario = inventario;
+	}
+
+
+	public String getGuilda() {
+		return guilda;
+	}
+
+
+	public void setGuilda(String guilda) {
+		this.guilda = guilda;
 	}
 	
 	
