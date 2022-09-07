@@ -13,7 +13,8 @@ public class Play {
 
 		Dao dao = new Dao();
 		Scanner entrada = new Scanner(System.in);
-
+//
+		int jow = 0;
 		entrada.useDelimiter("[\r\n]+");
 
 		System.out.println("Developed by Till's Tech.\nBem vindo ao Mundo de Dugeons & Dragons!!");
