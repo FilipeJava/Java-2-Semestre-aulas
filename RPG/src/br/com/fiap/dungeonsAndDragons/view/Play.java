@@ -19,7 +19,7 @@ public class Play {
 
 		System.out.println("Bem vindo ao Mundo DugeonsEdragons");
 
-		System.out.println("Digite o nome do Jogador: ");
+		System.out.print("Digite o nome do Jogador: ");
 
 		String name = entrada.next();
 
@@ -27,17 +27,19 @@ public class Play {
 				"-------------------Para comecar  " + name + " , voce deve criar sua Guilda que pode conter ate 3 "
 						+ "persoangens------------------------------------------------------------");
 
-		System.out.println("1-Quantos personagens tera sua Guilda: ");
+		System.out.print("1-Quantos personagens tera sua Guilda: ");
 		int qtd = entrada.nextInt();
 		System.out.println("Qual o nome da sua Guilda: ");
 		String guilda = entrada.next();
 
 		int i = 1;
 		do {
-			System.out.println("Guilda: " + guilda);
-			System.out.println("Criacao do Personangem  " + i);
-
+			
 			int id = (int) (51 * Math.random() * 1000);
+			System.out.println("Guilda: " + guilda);
+			System.out.println("Criacao do Personangem  " + id);
+
+			
 
 			System.out.println("Digite o nome de Do persoangem:");
 			String nome = entrada.next();
@@ -120,7 +122,34 @@ public class Play {
 			i++;
 		} while (i <= qtd);
 		
-		
+	System.out.println("-------------------------Fim do Cadastro de Personagem------------------------------------------------- ");
+	
+	
+	dao.listarPersonagem();
+	
+	
+	
+	System.out.println("Vamos procurar por id");
+	int index = entrada.nextInt();
+	
+	
+	System.out.println(dao.buscaPersonagem(index));
+	
+	
+	System.out.println("Vamos excluir:");
+	
+	dao.listarPersonagem();	
+	
+	System.out.println("qual vc deseja ecluir digite o id: ");
+	dao.excluirPersoangem(entrada.nextInt());
+	
+	
+	dao.listarPersonagem();
+
+	
+	System.out.println("vamos pesquisar por classe");
+	
+	dao.listaClasse(entrada.next());
 		
 		
 		

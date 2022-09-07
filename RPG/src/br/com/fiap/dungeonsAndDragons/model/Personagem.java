@@ -28,6 +28,20 @@ public class Personagem {
 	
 	
 	// construtor com fields
+		
+		public Personagem(int id, String nome, String raca, String classe, String guilda, int experiencia, int level,
+				List<Atributo> listaAtributo, List<Item> inventario) {
+			super();
+			this.id = id;
+			this.nome = nome;
+			this.raca = raca;
+			this.classe = classe;
+			this.guilda = guilda;
+			this.experiencia = experiencia;
+			this.level = level;
+			this.listaAtributo = listaAtributo;
+			this.inventario = inventario;
+		}
 
 		
 
@@ -38,19 +52,7 @@ public class Personagem {
 	}
 
 
-	public Personagem(int id, String nome, String raca, String classe, String guilda, int experiencia, int level,
-			List<Atributo> listaAtributo, List<Item> inventario) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.raca = raca;
-		this.classe = classe;
-		this.guilda = guilda;
-		this.experiencia = experiencia;
-		this.level = level;
-		this.listaAtributo = listaAtributo;
-		this.inventario = inventario;
-	}
+	
 
 
 	public void setId(int id) {
@@ -137,6 +139,15 @@ public class Personagem {
 		this.guilda = guilda;
 	}
 	
+	// metodo to string
+	
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "ID: " +id +" "+"Nome: "+nome+" "+"Raca: "+raca+" "+"Classe: "+classe+" "+"Guilda: "+guilda+" "+
+				"Experiencia: "+experiencia+" "+"Level: "+level;
+	}
 	
 
 	
