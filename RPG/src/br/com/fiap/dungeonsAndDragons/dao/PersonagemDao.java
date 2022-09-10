@@ -7,119 +7,180 @@ import br.com.fiap.dungeonsAndDragons.model.Atributo;
 import br.com.fiap.dungeonsAndDragons.model.Item;
 import br.com.fiap.dungeonsAndDragons.model.Personagem;
 
-public class Dao {
-
+/***
+ * Classe Dao para a Classe Personagem
+ * 
+ * @author Till's Tech
+ * @version 1.0
+ */
+public class PersonagemDao {
+	/***
+	 * Lista para armazenar os atributos do objeto Personagem do tipo Personagem
+	 */
 	List<Personagem> personagem = new ArrayList<>();
-	List<Atributo> atributo = new ArrayList<>();
-	List<Item> item = new ArrayList<>();
 
-	
-	// inclui persoangem na lista de Personagem
-	public void incluirPersonagem(Personagem personagem) {
+	/**
+	 * Realiza a inclusão do objeto Personagem na lista
+	 * 
+	 * @param personagem Objeto personagem que sera incluido
+	 */
+
+	public void incluir(Personagem personagem) {
 
 		this.personagem.add(personagem);
 
 	}
-	// inclui atributo na lista de atributos
-	public void incluirAtributo(Atributo atributo) {
 
-		this.atributo.add(atributo);
+	/**
+	 * Realiza a exclusão do objeto Personagem da lista
+	 * 
+	 * @param id Codigo de idenficicação do personagem
+	 */
 
-	}
-	// inclui item no inventario
-	public void incluirItem(Item item) {
+	public void excluir(int id) {
+		for (int i = 0; i < personagem.size(); i++) {
+			if (personagem.get(i).getId() == id) {
+				personagem.remove(i);
+				System.out.println("Personagem removido!");
 
-		this.item.add(item);
-
-	}
-	
-	
-	
-		
-	public List<Personagem> getPersonagem() {
-		return personagem;
-	}
-	
-	public List<Atributo> getAtributo() {
-		return atributo;
-	}
-
-	public List<Item> getItem() {
-		return item;
-	}
-
-	
-	
-	// método de exclusão por id de Persnagem 
-	public void excluirPersoangem ( int id) {
-		for (int i = 0; i < this.personagem.size(); i++) {
-			if (this.personagem.get(i).getId()==id) {
-				this.personagem.remove(i);
-								
+			} else if ((personagem.get(i).getId() != id) && i == personagem.size() - 1) {
+				System.out.println("Personagem não encontrado!");
 			}
-			
-		}
-					
-	}
-		
-	// método de Buscar  por id de Persnagem 
-	public Personagem buscaPersonagem ( int id) {
-			int index =0;
-			
-			for (int i = 0; i < this.personagem.size(); i++) {
-				if (this.personagem.get(i).getId()== id){
-					index = i;
-				}
-			}	
-								
-			return	this.personagem.get(index);
-		}
-	
-	
-	
-	
-	
-	// metodo listar personagem
-	
-	public void listarPersonagem() {
-		
-		for (Personagem p :this.personagem ) {
-			
-			System.out.println(p);;
+
 		}
 	}
-	
-	
-	// metodo de edição de nome
-	public void alteraNome (int id, String nome) {
-		for (Personagem p  : this.personagem) {
-			if (p.getId()==id) {
-				
+
+	/**
+	 * Realiza a busca do objeto Personagem na lista
+	 * 
+	 * @param id Codigo de idenficicação do personagem
+	 * @return Personagem com base no id
+	 */
+
+	public String buscar(int id) {
+		String personagem = "";
+		String n = "Personagem não encontrado!";
+		int i = 0;
+		while (i < this.personagem.size()) {
+			if (this.personagem.get(i).getId() == id) {
+				personagem += this.personagem.get(i);
+				return personagem;
+			} else {
+				i++;
+			}
+
+		}
+		return n;
+	}
+
+	/**
+	 * gera uma lista dos personagens
+	 */
+	public void listar() {
+		System.out.println("Segue abaixo os personegens criados.");
+		for (Personagem p : this.personagem) {
+
+			System.out.println(p);
+		}
+	}
+
+	/**
+	 * Altera o nome do personagem
+	 * 
+	 * @param id   Codigo de identificação
+	 * @param nome Nome que será incluido
+	 */
+	public void alteraNome(int id, String nome) {
+		for (Personagem p : this.personagem) {
+			if (p.getId() == id) {
 				p.setNome(nome);
-				
+			} else {
+				System.out.println("Personagem não encontrado!");
 			}
 		}
-		
 	}
-	
-	// pesquisar por classe
+
+	/**
+	 * Lista o personagem com base na raça
+	 * 
+	 * @param raca Raça que será utilizada como base na busca
+	 */
 	public void listaClasse(String raca) {
 		for (Personagem p : this.personagem) {
-			if (p.getRaca().equalsIgnoreCase(raca)){
-				
+			if (p.getRaca().equalsIgnoreCase(raca)) {
+
 				System.out.println(p);
+			} else {
+				System.out.println("Personagem não encontrado!");
 			}
-			
+
 		}
-		
+
 	}
-	
-				
-				
-	}//class
-	
-	
-	
-	
 
+	/**
+	 * exibir o nome
+	 * 
+	 * @param id Codigo de identificação
+	 */
+	public void nome(int id) {
+		int i = 0;
+		while (i < personagem.size()) {
+			if (personagem.get(i).getId() == id) {
+				System.out.println("Personagem: " + personagem.get(i).getNome() + "\n");
+			}
+			i++;
+		}
+	}
 
+	/**
+	 * 
+	 * @param id
+	 * @return retorna a lista de atributos com base no id
+	 */
+	public String listarAtributos(int id) {
+
+		String atributo = "";
+		String negativa = "Personagem não encontrado!!";
+		int i = 0;
+		while (i < personagem.size()) {
+			if (personagem.get(i).getId() == id) {
+				for (Atributo a : personagem.get(i).getListaAtributo()) {
+					atributo += a + "\n";
+				}
+				return atributo;
+
+			} else {
+				i++;
+			}
+
+		}
+		return negativa;
+	}
+
+	/**
+	 * Coleta a lista de itens
+	 * 
+	 * @param id Codigo de identificação
+	 * @return Retorna a lista de itens com base no id
+	 */
+	public String iventario(int id) {
+		String item = "";
+		String negativa = "Personagem não encontrado!!";
+		int i = 0;
+		while (i < personagem.size()) {
+			if (personagem.get(i).getId() == id) {
+				for (Item itens : personagem.get(i).getInventario()) {
+					item += itens + "\n";
+				}
+				return item;
+
+			} else {
+				i++;
+			}
+
+		}
+		return negativa;
+
+	}
+}// class
