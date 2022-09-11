@@ -1,4 +1,4 @@
-package br.com.fiap.dungeonsAndDragons.model;
+package br.com.tills.dungeonsdragons.model;
 
 /**
  * Classe que abstrai um Item

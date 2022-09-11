@@ -1,17 +1,19 @@
-package br.com.fiap.dungeonsAndDragons.view;
+package br.com.tills.dungeonsdragons.view;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import br.com.fiap.dungeonsAndDragons.dao.AtributoDao;
-import br.com.fiap.dungeonsAndDragons.dao.ItemDao;
-import br.com.fiap.dungeonsAndDragons.dao.PersonagemDao;
-import br.com.fiap.dungeonsAndDragons.model.Atributo;
-import br.com.fiap.dungeonsAndDragons.model.Item;
-import br.com.fiap.dungeonsAndDragons.model.Personagem;
+import br.com.tills.dungeonsdragons.dao.AtributoDao;
+import br.com.tills.dungeonsdragons.dao.ItemDao;
+import br.com.tills.dungeonsdragons.dao.PersonagemDao;
+import br.com.tills.dungeonsdragons.exceptions.InputLessOrEqualThenZeroException;
+import br.com.tills.dungeonsdragons.model.Atributo;
+import br.com.tills.dungeonsdragons.model.Item;
+import br.com.tills.dungeonsdragons.model.Personagem;
 
 /***
- * Classe que exibe/coleta as informações do programa e realiza o input de dados do usuario
+ * Classe que exibe/coleta as informações do programa e realiza o input de dados
+ * do usuario
  * 
  * @author Till's Tech
  * @version 1.0
@@ -46,10 +48,15 @@ public class Play {
 			try {
 				System.out.print("Quantos personagens sua guilda vai possuir? ");
 				qtd = entrada.nextInt();
+				if (qtd <= 0) {
+					throw new InputLessOrEqualThenZeroException();
+				}
 				break;
 			} catch (InputMismatchException e) {
 				entrada.next();
-				System.out.println("Input invalido!");
+				System.out.println("Escrever somente números!");
+			} catch (InputLessOrEqualThenZeroException e) {
+				System.out.println("Valor deve ser maior que zero!");
 			}
 		}
 		System.out.println("------------------------------------------------------------");
@@ -76,12 +83,18 @@ public class Play {
 					System.out.println(inputRaca);
 					System.out.print("Selecione a Raça: ");
 					rmetodo = entrada.nextInt();
+					if (rmetodo <= 0) {
+						throw new InputLessOrEqualThenZeroException();
+					}
 					break;
 
 				} catch (InputMismatchException e) {
 					entrada.next();
-					System.out.println("Input invalido!!");
+					System.out.println("Escrever somente números!");
+				} catch (InputLessOrEqualThenZeroException e) {
+					System.out.println("Valor deve ser maior que zero!");
 				}
+
 			}
 			switch (rmetodo) {
 			case 1:
@@ -108,17 +121,23 @@ public class Play {
 
 			default:
 
-				while (rmetodo > 8 || rmetodo < 0) {
+				while (rmetodo > 8 || rmetodo <= 0) {
 					while (true) {
 						try {
 							System.out.println(inputRaca);
 							System.out.print("Digite um dos numeros que estão no intevalo: ");
 							rmetodo = entrada.nextInt();
+							if (rmetodo <= 0) {
+								throw new InputLessOrEqualThenZeroException();
+							}
 							break;
 						} catch (InputMismatchException e) {
 							entrada.next();
-							System.out.println("Input invalido!!");
+							System.out.println("Escrever somente números!!");
+						} catch (InputLessOrEqualThenZeroException e) {
+							System.out.println("Valor deve ser maior que zero!");
 						}
+
 					}
 				} // while
 				break;
@@ -131,10 +150,15 @@ public class Play {
 					System.out.println(inputClasses);
 					System.out.print("Selecione a Classe: ");
 					rmetodo = entrada.nextInt();
+					if (rmetodo <= 0) {
+						throw new InputLessOrEqualThenZeroException();
+					}
 					break;
 				} catch (InputMismatchException e) {
 					entrada.next();
-					System.out.println("Input invaido!!");
+					System.out.println("Escrever somente números!");
+				} catch (InputLessOrEqualThenZeroException e) {
+					System.out.println("Valor deve ser maior que zero!");
 				}
 			}
 			String classe = "";
@@ -162,16 +186,21 @@ public class Play {
 				break;
 
 			default:
-				while (rmetodo > 7 || rmetodo < 0) {
+				while (rmetodo > 7 || rmetodo <= 0) {
 					while (true) {
 						try {
 							System.out.println(inputClasses);
 							System.out.print("Digite um dos numeros que estão no intevalo: ");
 							rmetodo = entrada.nextInt();
+							if (rmetodo <= 0) {
+								throw new InputLessOrEqualThenZeroException();
+							}
 							break;
 						} catch (InputMismatchException e) {
 							entrada.next();
-							System.out.println("Input invalido!!");
+							System.out.println("Escrever somente números!");
+						} catch (InputLessOrEqualThenZeroException e) {
+							System.out.println("Valor deve ser maior que zero!");
 						}
 					}
 				}
@@ -200,11 +229,16 @@ public class Play {
 					System.out.println(inputAtributo);
 					System.out.print("\nSelecione o atributo que deseja upar: ");
 					rmetodo = entrada.nextInt();
+					if (rmetodo <= 0) {
+						throw new InputLessOrEqualThenZeroException();
+					}
 					break;
 
 				} catch (InputMismatchException e) {
 					entrada.next();
-					System.out.println("Input invalido!!");
+					System.out.println("Escrever somente números!");
+				} catch (InputLessOrEqualThenZeroException e) {
+					System.out.println("Valor deve ser maior que zero!");
 				}
 			}
 			while (total > 1) {
@@ -241,16 +275,21 @@ public class Play {
 					break;
 
 				default:
-					while (rmetodo > 6 || rmetodo < 0) {
+					while (rmetodo > 6 || rmetodo <= 0) {
 						while (true) {
 							try {
 								System.out.println(inputAtributo);
 								System.out.print("Digite um dos numeros que estão no intevalo: ");
 								rmetodo = entrada.nextInt();
+								if (rmetodo <= 0) {
+									throw new InputLessOrEqualThenZeroException();
+								}
 								break;
 							} catch (InputMismatchException e) {
 								entrada.next();
-								System.out.println("Input invalido!!");
+								System.out.println("Escrever somente números!");
+							} catch (InputLessOrEqualThenZeroException e) {
+								System.out.println("Valor deve ser maior que zero!");
 							}
 						}
 					} // while
@@ -263,11 +302,16 @@ public class Play {
 						System.out.print("\nVocê possui " + total
 								+ " pontos para utilizar.\nSelecione o atributo que deseja subir: \r");
 						rmetodo = entrada.nextInt();
+						if (rmetodo <= 0) {
+							throw new InputLessOrEqualThenZeroException();
+						}
 						break;
 					} catch (InputMismatchException e) {
 						entrada.next();
-						System.out.println("Input invalido!!");
+						System.out.println("Escrever somente números!");
 
+					} catch (InputLessOrEqualThenZeroException e) {
+						System.out.println("Valor deve ser maior que zero!");
 					}
 				}
 
@@ -276,7 +320,6 @@ public class Play {
 			System.out.println("Está na hora de incluir alguns items no seu inventário, vamos lá!");
 
 			String flag = "S";
-
 			int cod = 1;
 			do {
 
@@ -287,11 +330,16 @@ public class Play {
 					try {
 						System.out.print("Digite a quantidade: ");
 						iQtd = entrada.nextInt();
+						if (iQtd <= 0) {
+							throw new InputLessOrEqualThenZeroException();
+						}
 						break;
 					} catch (InputMismatchException e) {
 						entrada.next();
-						System.out.println("Input invalido!!");
+						System.out.println("Escrever somente números!");
 
+					} catch (InputLessOrEqualThenZeroException e) {
+						System.out.println("Valor deve ser maior que zero!");
 					}
 				}
 
@@ -300,7 +348,7 @@ public class Play {
 
 				itemDao.incluirItem(new Item(cod, iName, iQtd, iDes));
 
-				System.out.print("\rDeseja incluir mais itens: S-sim | N-nao: ");
+				System.out.print("\rDeseja incluir mais itens? S-sim | N-nao: ");
 				flag = entrada.next();
 				cod++;
 			} while (flag.equalsIgnoreCase("S"));
@@ -321,21 +369,28 @@ public class Play {
 		System.out.println(
 				"Antes de iniciarmos nossa jornada, gostariamos de confirmar se os dados preenchidos serão corretos. ");
 		System.out.println("Segue abaixo as funções disponiveis:");
+
 		String menuMetodos = "1-Excluir personagem\n2-Realizar busca do personagem\n3-Listar o(s) personagem(s)\n4-Alterar o nome do personagem\n5-Listar os atributos do personagem\n6-listar os personagens utilizando a classe\n7-Listar iventario";
 
-		String resposta = "Y";
+		String resposta = "s";
 		int rmetodo;
-		while (resposta.equalsIgnoreCase("Y")) {
+		while (resposta.equalsIgnoreCase("s")) {
 			while (true) {
 				try {
 					System.out.println(menuMetodos + "\n");
 					System.out.println("selecione uma das opções: ");
 					rmetodo = entrada.nextInt();
+					if (rmetodo <= 0) {
+						throw new InputLessOrEqualThenZeroException();
+
+					}
 					break;
 				} catch (InputMismatchException e) {
 					entrada.next();
-					System.out.println("Input invalido!!");
+					System.out.println("Escrever somente números!");
 
+				} catch (InputLessOrEqualThenZeroException e) {
+					System.out.println("Valor deve ser maior que zero!");
 				}
 			}
 			switch (rmetodo) {
@@ -343,14 +398,19 @@ public class Play {
 			case 1: // 1-Excluir personagem
 				while (true) {
 					try {
-						System.out.println("Digite o numero de identificação do personangem que deseja excluir: ");
+						System.out.println("Digite o numero de identificação do personangem: ");
 						rmetodo = entrada.nextInt();
+						if (rmetodo <= 0) {
+							throw new InputLessOrEqualThenZeroException();
+						}
 						personagemDao.excluir(rmetodo);
-
 						break;
 					} catch (InputMismatchException e) {
 						entrada.next();
-						System.out.println("Input inválido!!");
+						System.out.println("Escrever somente números!");
+
+					} catch (InputLessOrEqualThenZeroException e) {
+						System.out.println("Valor deve ser maior que zero!");
 					}
 				}
 
@@ -359,13 +419,19 @@ public class Play {
 			case 2: // 2-Realizar busca do personagem
 				while (true) {
 					try {
-						System.out.println("Digite o numero de identificação do personangem que deseja consultar: ");
+						System.out.println("Digite o numero de identificação do personangem: ");
 						rmetodo = entrada.nextInt();
+						if (rmetodo <= 0) {
+							throw new InputLessOrEqualThenZeroException();
+						}
 						System.out.println(personagemDao.buscar(rmetodo));
 						break;
 					} catch (InputMismatchException e) {
 						entrada.next();
-						System.out.println("Input inválido!");
+						System.out.println("Escrever somente números!");
+
+					} catch (InputLessOrEqualThenZeroException e) {
+						System.out.println("Valor deve ser maior que zero!");
 					}
 				}
 				break;
@@ -378,12 +444,18 @@ public class Play {
 			case 4:// 4-Alterar o nome do personagem
 				while (true) {
 					try {
-						System.out.println("Digite o numero de identificação do personangem que deseja alterar: ");
+						System.out.println("Digite o numero de identificação do personangem: ");
 						rmetodo = entrada.nextInt();
+						if (rmetodo <= 0) {
+							throw new InputLessOrEqualThenZeroException();
+						}
 						break;
 					} catch (InputMismatchException e) {
 						entrada.next();
-						System.out.println("Input inválido!!");
+						System.out.println("Escrever somente números!");
+
+					} catch (InputLessOrEqualThenZeroException e) {
+						System.out.println("Valor deve ser maior que zero!");
 					}
 				}
 				System.out.println("Digite o novo nome: ");
@@ -395,12 +467,18 @@ public class Play {
 			case 5: // 5-listar os atributos do personagem
 				while (true) {
 					try {
-						System.out.println("Digite o numero de identificação do personangem que deseja consultar: ");
+						System.out.println("Digite o numero de identificação do personangem: ");
 						rmetodo = entrada.nextInt();
+						if (rmetodo <= 0) {
+							throw new InputLessOrEqualThenZeroException();
+						}
 						break;
 					} catch (InputMismatchException e) {
 						entrada.next();
-						System.out.println("Input inválido!!");
+						System.out.println("Escrever somente números!");
+
+					} catch (InputLessOrEqualThenZeroException e) {
+						System.out.println("Valor deve ser maior que zero!");
 					}
 				}
 				personagemDao.nome(rmetodo);
@@ -416,15 +494,20 @@ public class Play {
 
 				break;
 
-			case 7: // 6-listar o iventario
+			case 7: // 7-listar o iventario
 				while (true) {
 					try {
-						System.out.println("Digite o numero de identificação do personangem que deseja consultar: ");
+						System.out.println("Digite o numero de identificação do personangem: ");
 						rmetodo = entrada.nextInt();
+						if (rmetodo <= 0) {
+							throw new InputLessOrEqualThenZeroException();
+						}
 						break;
 					} catch (InputMismatchException e) {
 						entrada.next();
-						System.out.println("Input inválido!!");
+						System.out.println("Escrever somente números!");
+					} catch (InputLessOrEqualThenZeroException e) {
+						System.out.println("Valor deve ser maior que zero!");
 					}
 				}
 				personagemDao.nome(rmetodo);
@@ -434,15 +517,15 @@ public class Play {
 
 			default:
 
-				if (rmetodo > 7 || rmetodo < 0) {
-					System.out.print("Digite somente numeros entre 0 e 5. \n");
+				if (rmetodo > 7 || rmetodo <= 0) {
+					System.out.print("Digite somente numeros entre 1 e 7. \n");
 
 				}
 				break;
 
 			}// switch
 
-			System.out.println("Deseja retornar ao menu anterior? (Y/N)");
+			System.out.println("Deseja retornar ao menu anterior? S-sim | N-nao:");
 			resposta = entrada.next();
 		} // while
 

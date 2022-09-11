@@ -1,9 +1,9 @@
-package br.com.fiap.dungeonsAndDragons.dao;
+package br.com.tills.dungeonsdragons.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.fiap.dungeonsAndDragons.model.Atributo;
+import br.com.tills.dungeonsdragons.model.Atributo;
 
 /***
  * Classe Dao para a Classe Atributo
