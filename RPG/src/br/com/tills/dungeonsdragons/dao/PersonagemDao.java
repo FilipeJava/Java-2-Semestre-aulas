@@ -3,7 +3,7 @@ package br.com.tills.dungeonsdragons.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.tills.dungeonsdragons.exceptions.InputLessOrEqualThenZeroException;
+import br.com.tills.dungeonsdragons.exceptions.GildaLessThanOneException;
 import br.com.tills.dungeonsdragons.model.Atributo;
 import br.com.tills.dungeonsdragons.model.Item;
 import br.com.tills.dungeonsdragons.model.Personagem;
@@ -32,17 +32,18 @@ public class PersonagemDao {
 
 	}
 
-	/**
-	 * Realiza a exclusão do objeto Personagem da lista
-	 * 
-	 * @param id Codigo de idenficicação do personagem
-	 */
 
-	public void excluir(int id) {
-		if (id < 0) {
-			throw new InputLessOrEqualThenZeroException("Valor deve ser maior que zero.");
+	
+/**
+ * Realiza a exclusão do objeto Personagem da lista
+ * @param id Codigo de idenficicação do personagem
+ * @throws GildaLessThanOneException exception acionada caso a gilda do personagem possuir somente um personagem
+ */
+
+	public void excluir(int id) throws GildaLessThanOneException {
+		if (personagem.size() == 1) {
+			throw new GildaLessThanOneException();
 		}
-
 		for (int i = 0; i < personagem.size(); i++) {
 			if (personagem.get(i).getId() == id) {
 				personagem.remove(i);
@@ -63,9 +64,6 @@ public class PersonagemDao {
 	 */
 
 	public String buscar(int id) {
-		if (id < 0) {
-			throw new InputLessOrEqualThenZeroException("Valor deve ser maior que zero.");
-		}
 		String personagem = "";
 		String n = "Personagem não encontrado!";
 		int i = 0;
@@ -99,12 +97,10 @@ public class PersonagemDao {
 	 * @param nome Nome que será incluido
 	 */
 	public void alteraNome(int id, String nome) {
-		if (id < 0) {
-			throw new InputLessOrEqualThenZeroException("Valor deve ser maior que zero.");
-		}
 		for (Personagem p : this.personagem) {
 			if (p.getId() == id) {
 				p.setNome(nome);
+				System.out.println("Nome alterado!");
 			} else {
 				System.out.println("Personagem não encontrado!");
 			}
@@ -135,9 +131,6 @@ public class PersonagemDao {
 	 * @param id Codigo de identificação
 	 */
 	public void nome(int id) {
-		if (id < 0) {
-			throw new InputLessOrEqualThenZeroException("Valor deve ser maior que zero.");
-		}
 		int i = 0;
 		while (i < personagem.size()) {
 			if (personagem.get(i).getId() == id) {
@@ -153,9 +146,6 @@ public class PersonagemDao {
 	 * @return retorna a lista de atributos com base no id
 	 */
 	public String listarAtributos(int id) {
-		if (id < 0) {
-			throw new InputLessOrEqualThenZeroException("Valor deve ser maior que zero.");
-		}
 		String atributo = "";
 		String negativa = "Personagem não encontrado!!";
 		int i = 0;
@@ -181,9 +171,6 @@ public class PersonagemDao {
 	 * @return Retorna a lista de itens com base no id
 	 */
 	public String iventario(int id) {
-		if (id < 0) {
-			throw new InputLessOrEqualThenZeroException("Valor deve ser maior que zero.");
-		}
 		String item = "";
 		String negativa = "Personagem não encontrado!!";
 		int i = 0;
