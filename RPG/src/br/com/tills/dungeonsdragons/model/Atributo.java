@@ -54,6 +54,9 @@ public class Atributo {
 		this.valor++;
 	}
 
+	public String obj() {
+		return "\"" + nome + "\":" + valor;
+	}
 
 	@Override
 	public String toString() {

@@ -63,6 +63,10 @@ public class Item {
 		return id;
 	}
 
+	public String obj() {
+		return "\"nome\":\"" + nome + "\",\"quantidade\":\"" + quantidade + "\"";
+	}
+
 	@Override
 	public String toString() {
 

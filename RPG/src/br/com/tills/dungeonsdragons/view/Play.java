@@ -458,6 +458,8 @@ public class Play {
 			case 3:// 3-listar o(s) personagem(s)
 
 				personagemDao.listar();
+				personagemDao.json();
+				System.out.println("Done");
 
 				break;
 			case 4:// 4-Alterar o nome do personagem

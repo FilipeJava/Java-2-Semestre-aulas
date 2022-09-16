@@ -19,6 +19,7 @@ public class PersonagemDao {
 	 * Lista para armazenar os atributos do objeto Personagem do tipo Personagem
 	 */
 	List<Personagem> personagem = new ArrayList<>();
+	List<Object> lista = new ArrayList<Object>();
 
 	/**
 	 * Realiza a inclusão do objeto Personagem na lista
@@ -32,13 +33,13 @@ public class PersonagemDao {
 
 	}
 
-
-	
-/**
- * Realiza a exclusão do objeto Personagem da lista
- * @param id Codigo de idenficicação do personagem
- * @throws GildaLessThanOneException exception acionada caso a gilda do personagem possuir somente um personagem
- */
+	/**
+	 * Realiza a exclusão do objeto Personagem da lista
+	 * 
+	 * @param id Codigo de idenficicação do personagem
+	 * @throws GildaLessThanOneException exception acionada caso a gilda possuir
+	 *                                   somente um personagem
+	 */
 
 	public void excluir(int id) throws GildaLessThanOneException {
 		if (personagem.size() == 1) {
@@ -84,7 +85,7 @@ public class PersonagemDao {
 	 */
 	public void listar() {
 		System.out.println("Segue abaixo os personegens criados.");
-		for (Personagem p : this.personagem) {
+		for (Personagem p : personagem) {
 
 			System.out.println(p);
 		}
@@ -97,7 +98,7 @@ public class PersonagemDao {
 	 * @param nome Nome que será incluido
 	 */
 	public void alteraNome(int id, String nome) {
-		for (Personagem p : this.personagem) {
+		for (Personagem p : personagem) {
 			if (p.getId() == id) {
 				p.setNome(nome);
 				System.out.println("Nome alterado!");
@@ -187,6 +188,64 @@ public class PersonagemDao {
 
 		}
 		return negativa;
+	}
+
+	public String json() {
+		int i = 0;
+		String json = "[{" + personagem.get(i).obj() + ",\"Itens\":[";
+
+		while (i < personagem.size()) {
+			if (i == personagem.size() - 1) {
+				json += "{" + personagem.get(i).obj() + ",\"Itens\":[";
+				int j = 0;
+				while (j < personagem.get(i).getInventario().size()) {
+					if (j == personagem.get(i).getInventario().size() - 1) {
+						json += "{" + personagem.get(i).getInventario().get(j).obj() + "}],\"Atributos\": [{";
+					} else {
+						json += "{" + personagem.get(i).getInventario().get(j).obj() + "},";
+					}
+					j++;
+				}
+				j = 0;
+				while (j < personagem.get(i).getListaAtributo().size()) {
+					if (j == personagem.get(i).getListaAtributo().size() - 1) {
+						json += personagem.get(i).getListaAtributo().get(j).obj() + "}]}]";
+					} else {
+						json += personagem.get(i).getListaAtributo().get(j).obj() + ",";
+					}
+					j++;
+
+				}
+
+			} // if
+			else {
+//				json = "[{" + personagem.get(i).obj() + ",\"Itens\":[";
+
+				int j = 0;
+				while (j < personagem.get(i).getInventario().size()) {
+					if (j == personagem.get(i).getInventario().size() - 1) {
+						json += "{" + personagem.get(i).getInventario().get(j).obj() + "}],\"Atributos\": [{";
+					} else {
+						json += "{" + personagem.get(i).getInventario().get(j).obj() + "},";
+					}
+					j++;
+				}
+				j = 0;
+				while (j < personagem.get(i).getListaAtributo().size()) {
+					if (j == personagem.get(i).getListaAtributo().size() - 1) {
+						json += personagem.get(i).getListaAtributo().get(j).obj() + "}]},";
+					} else {
+						json += personagem.get(i).getListaAtributo().get(j).obj() + ",";
+					}
+					j++;
+
+				}
+
+			}
+			i++;
+		}
+
+		return json;
 
 	}
 }// class

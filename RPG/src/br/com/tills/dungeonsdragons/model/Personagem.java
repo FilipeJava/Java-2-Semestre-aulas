@@ -140,6 +140,11 @@ public class Personagem {
 		this.guilda = guilda;
 	}
 
+	public String obj() {
+		return "\"id\":" + id + ",\"nome\":\"" + nome + "\",\"raça\":\"" + raca + "\",\"classe\":\"" + classe
+				+ "\",\"gilda\":\"" + guilda + "\",\"experiencia\":\"" + experiencia + "\",\"level\":\"" + level + "\"";
+
+	}
 
 	@Override
 	public String toString() {
