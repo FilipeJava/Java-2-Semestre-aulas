@@ -1,5 +1,8 @@
 package br.com.tills.dungeonsdragons.dao;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -192,11 +195,12 @@ public class PersonagemDao {
 
 	public String json() {
 		int i = 0;
-		String json = "[{" + personagem.get(i).obj() + ",\"Itens\":[";
+		String json = "[";
 
 		while (i < personagem.size()) {
 			if (i == personagem.size() - 1) {
-				json += "{" + personagem.get(i).obj() + ",\"Itens\":[";
+					json += "{" + personagem.get(i).obj() + ",\"Itens\":[";
+				
 				int j = 0;
 				while (j < personagem.get(i).getInventario().size()) {
 					if (j == personagem.get(i).getInventario().size() - 1) {
@@ -214,14 +218,11 @@ public class PersonagemDao {
 						json += personagem.get(i).getListaAtributo().get(j).obj() + ",";
 					}
 					j++;
-
 				}
-
 			} // if
 			else {
-//				json = "[{" + personagem.get(i).obj() + ",\"Itens\":[";
-
 				int j = 0;
+				json += "{" + personagem.get(i).obj() + ",\"Itens\":[";
 				while (j < personagem.get(i).getInventario().size()) {
 					if (j == personagem.get(i).getInventario().size() - 1) {
 						json += "{" + personagem.get(i).getInventario().get(j).obj() + "}],\"Atributos\": [{";
@@ -248,4 +249,14 @@ public class PersonagemDao {
 		return json;
 
 	}
+
+	public void gravar(String json, String nomeArquivo) throws IOException {
+
+		PrintWriter write = new PrintWriter(new FileWriter(nomeArquivo + ".json"));
+
+		write.println(json);
+
+		write.close();
+	}
+
 }// class

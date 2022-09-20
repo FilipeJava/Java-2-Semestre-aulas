@@ -1,5 +1,6 @@
 package br.com.tills.dungeonsdragons.view;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -385,7 +386,7 @@ public class Play {
 				"Antes de iniciarmos nossa jornada, gostariamos de confirmar se os dados preenchidos serão corretos. \r");
 		System.out.println("Segue abaixo as funções disponiveis:\r");
 
-		String menuMetodos = "1-Excluir personagem\n2-Realizar busca do personagem\n3-Listar o(s) personagem(s)\n4-Alterar o nome do personagem\n5-Listar os atributos do personagem\n6-listar os personagens utilizando a classe\n7-Listar iventario";
+		String menuMetodos = "1-Excluir personagem\n2-Realizar busca do personagem\n3-Listar o(s) personagem(s)\n4-Alterar o nome do personagem\n5-Listar os atributos do personagem\n6-listar os personagens utilizando a classe\n7-Listar iventario\n8-Gerar JSON";
 
 		String resposta = "s";
 		int rmetodo;
@@ -458,8 +459,6 @@ public class Play {
 			case 3:// 3-listar o(s) personagem(s)
 
 				personagemDao.listar();
-				personagemDao.json();
-				System.out.println("Done");
 
 				break;
 			case 4:// 4-Alterar o nome do personagem
@@ -536,10 +535,39 @@ public class Play {
 
 				break;
 
+			case 8: // gerar JSON
+				while (true) {
+					try {
+						System.out.println("Gostaria que fosse gravado em um arquivo? (s/n) ");
+						String r = entrada.next();
+						if ((!r.equalsIgnoreCase("s")) && (!r.equalsIgnoreCase("n"))) {
+							throw new SNException();
+						} else if (r.equalsIgnoreCase("s")) {
+							try {
+								System.out.println("Digite o nome do arquivo: ");
+								personagemDao.gravar(personagemDao.json(), entrada.next());
+								System.out.println("Arquivo gerado com o tipo .json!");
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						} else if (r.equalsIgnoreCase("n")) {
+
+							System.out.println("Segue abaixo o JSON gerado:");
+							System.out.println(personagemDao.json());
+
+						}
+						break;
+					} catch (SNException e) {
+						System.out.println("Digite apenas S ou N.");
+					}
+				}
+
+				break;
 			default:
 
-				if (rmetodo > 7 || rmetodo <= 0) {
-					System.out.print("Digite somente numeros entre 1 e 7. \n");
+				if (rmetodo > 8 || rmetodo <= 0) {
+					System.out.print("Digite somente numeros entre 1 e 8. \n");
 
 				}
 				break;
