@@ -46,10 +46,229 @@ public class Play {
 		System.out.println("------------------------------------------------------------\r\nBoooa " + name
 				+ "!! Para inicar o jogo voce deve criar sua Guilda. "
 				+ "\r\n------------------------------------------------------------");
+		criarPersonagem(personagemDao, itemDao, atributo, entrada);
+
+		menuPersonagem(personagemDao, entrada);
+
+		System.out.println(
+				"Obrigado por testar nossa alfa do nosso protipo D&D!!\nFique antenado para novos updates.\nAté breve!!");
+
+		entrada.close();
+	}// main
+
+	private static void menuPersonagem(PersonagemDao personagemDao, Scanner entrada) {
+		System.out.println(
+				"Antes de iniciarmos nossa jornada, gostariamos de confirmar se os dados preenchidos estão corretos. \r");
+		System.out.println("Segue abaixo as funções disponiveis:\r");
+
+		String menuMetodos = "1-Excluir personagem\n2-Realizar busca do personagem\n3-Listar o(s) personagem(s)\n4-Alterar o nome do personagem\n5-Listar os atributos do personagem\n6-listar os personagens utilizando a classe\n7-Listar iventario\n8-Gerar JSON";
+
+		String resposta = "s";
+		int rmetodo;
+		while (resposta.equalsIgnoreCase("s")) {
+			while (true) {
+				try {
+					System.out.println(menuMetodos + "\n");
+					System.out.println("selecione uma das opções: ");
+					rmetodo = entrada.nextInt();
+					if (rmetodo <= 0) {
+						throw new InputLessOrEqualThanZeroException();
+
+					}
+					break;
+				} catch (InputMismatchException e) {
+					entrada.next();
+					System.out.println("Escrever somente números!");
+
+				} catch (InputLessOrEqualThanZeroException e) {
+					System.out.println("Valor deve ser maior que zero!");
+				}
+			}
+			switch (rmetodo) {
+
+			case 1: // 1-Excluir personagem
+				while (true) {
+					try {
+						System.out.println("Digite o numero de identificação do personangem (id): ");
+						rmetodo = entrada.nextInt();
+						if (rmetodo <= 0) {
+							throw new InputLessOrEqualThanZeroException();
+						}
+						personagemDao.excluir(rmetodo);
+						break;
+					} catch (InputMismatchException e) {
+						entrada.next();
+						System.out.println("Escrever somente números!");
+
+					} catch (InputLessOrEqualThanZeroException e) {
+						System.out.println("Valor deve ser maior que zero!");
+					} catch (GildaLessThanOneException e) {
+						System.out
+								.println("Não é possivel realizar a exclusão.\nSua gilda possui apenas um personagem.");
+						break;
+					}
+				}
+
+				break;
+
+			case 2: // 2-Realizar busca do personagem
+				while (true) {
+					try {
+						System.out.println("Digite o numero de identificação do personangem (id): ");
+						rmetodo = entrada.nextInt();
+						if (rmetodo <= 0) {
+							throw new InputLessOrEqualThanZeroException();
+						}
+						System.out.println(personagemDao.buscar(rmetodo));
+						break;
+					} catch (InputMismatchException e) {
+						entrada.next();
+						System.out.println("Escrever somente números!");
+
+					} catch (InputLessOrEqualThanZeroException e) {
+						System.out.println("Valor deve ser maior que zero!");
+					}
+				}
+				break;
+
+			case 3:// 3-listar o(s) personagem(s)
+
+				personagemDao.listar();
+
+				break;
+			case 4:// 4-Alterar o nome do personagem
+				while (true) {
+					try {
+						System.out.println("Digite o numero de identificação do personangem (id): ");
+						rmetodo = entrada.nextInt();
+						if (rmetodo <= 0) {
+							throw new InputLessOrEqualThanZeroException();
+						}
+						break;
+					} catch (InputMismatchException e) {
+						entrada.next();
+						System.out.println("Escrever somente números!");
+
+					} catch (InputLessOrEqualThanZeroException e) {
+						System.out.println("Valor deve ser maior que zero!");
+					}
+				}
+				System.out.println("Digite o novo nome: ");
+				String n = entrada.next();
+
+				personagemDao.alteraNome(rmetodo, n);
+
+				break;
+			case 5: // 5-listar os atributos do personagem
+				while (true) {
+					try {
+						System.out.println("Digite o numero de identificação do personangem (id): ");
+						rmetodo = entrada.nextInt();
+						if (rmetodo <= 0) {
+							throw new InputLessOrEqualThanZeroException();
+						}
+						break;
+					} catch (InputMismatchException e) {
+						entrada.next();
+						System.out.println("Escrever somente números!");
+
+					} catch (InputLessOrEqualThanZeroException e) {
+						System.out.println("Valor deve ser maior que zero!");
+					}
+				}
+				personagemDao.nome(rmetodo);
+				System.out.println(personagemDao.listarAtributos(rmetodo));
+
+				break;
+
+			case 6: // 6-listar os personagens utilizando a classe
+				System.out.println("Digite a classe: ");
+				String c = entrada.next();
+
+				personagemDao.listaClasse(c);
+
+				break;
+
+			case 7: // 7-listar o iventario
+				while (true) {
+					try {
+						System.out.println("Digite o numero de identificação do personangem (id): ");
+						rmetodo = entrada.nextInt();
+						if (rmetodo <= 0) {
+							throw new InputLessOrEqualThanZeroException();
+						}
+						break;
+					} catch (InputMismatchException e) {
+						entrada.next();
+						System.out.println("Escrever somente números!");
+					} catch (InputLessOrEqualThanZeroException e) {
+						System.out.println("Valor deve ser maior que zero!");
+					}
+				}
+				personagemDao.nome(rmetodo);
+				System.out.println(personagemDao.iventario(rmetodo));
+
+				break;
+
+			case 8: // gerar JSON
+				while (true) {
+					try {
+						System.out.println("Gostaria que fosse gravado em um arquivo? (s/n) ");
+						String r = entrada.next();
+						if ((!r.equalsIgnoreCase("s")) && (!r.equalsIgnoreCase("n"))) {
+							throw new SNException();
+						} else if (r.equalsIgnoreCase("s")) {
+							try {
+								System.out.println("Digite o nome do arquivo: ");
+								personagemDao.gravar(personagemDao.json(), entrada.next());
+								System.out.println("Arquivo gerado com o tipo .json!");
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						} else if (r.equalsIgnoreCase("n")) {
+
+							System.out.println("Segue abaixo o JSON gerado:");
+							System.out.println(personagemDao.json());
+
+						}
+						break;
+					} catch (SNException e) {
+						System.out.println("Digite apenas S ou N.");
+					}
+				}
+
+				break;
+			default:
+
+				if (rmetodo > 8 || rmetodo <= 0) {
+					System.out.print("Digite somente numeros entre 1 e 8. \n");
+
+				}
+				break;
+
+			}// switch
+			while (true) {
+				try {
+					System.out.println("Deseja retornar ao menu anterior? S-sim | N-nao:");
+					resposta = entrada.next();
+					if ((!resposta.equalsIgnoreCase("s")) && (!resposta.equalsIgnoreCase("n"))) {
+						throw new SNException();
+					}
+					break;
+				} catch (SNException e) {
+					System.out.println("Digite apenas S ou N.");
+				}
+
+			}
+		} // while
+	}
+
+	private static void criarPersonagem(PersonagemDao personagemDao, ItemDao itemDao, AtributoDao atributo,
+			Scanner entrada) {
 		int qtd = 0;
 		while (true) {
 			try {
-				System.out.print("Quantos personagens sua guilda vai possuir? ");
+				System.out.print("Quantos personagens voce vai adicionar na sua gilda? ");
 				qtd = entrada.nextInt();
 				if (qtd <= 0) {
 					throw new InputLessOrEqualThanZeroException();
@@ -381,217 +600,6 @@ public class Play {
 
 		System.out.println(
 				"-------------------------Fim do Cadastro de Personagem-------------------------------------------------\r");
-
-		System.out.println(
-				"Antes de iniciarmos nossa jornada, gostariamos de confirmar se os dados preenchidos serão corretos. \r");
-		System.out.println("Segue abaixo as funções disponiveis:\r");
-
-		String menuMetodos = "1-Excluir personagem\n2-Realizar busca do personagem\n3-Listar o(s) personagem(s)\n4-Alterar o nome do personagem\n5-Listar os atributos do personagem\n6-listar os personagens utilizando a classe\n7-Listar iventario\n8-Gerar JSON";
-
-		String resposta = "s";
-		int rmetodo;
-		while (resposta.equalsIgnoreCase("s")) {
-			while (true) {
-				try {
-					System.out.println(menuMetodos + "\n");
-					System.out.println("selecione uma das opções: ");
-					rmetodo = entrada.nextInt();
-					if (rmetodo <= 0) {
-						throw new InputLessOrEqualThanZeroException();
-
-					}
-					break;
-				} catch (InputMismatchException e) {
-					entrada.next();
-					System.out.println("Escrever somente números!");
-
-				} catch (InputLessOrEqualThanZeroException e) {
-					System.out.println("Valor deve ser maior que zero!");
-				}
-			}
-			switch (rmetodo) {
-
-			case 1: // 1-Excluir personagem
-				while (true) {
-					try {
-						System.out.println("Digite o numero de identificação do personangem (id): ");
-						rmetodo = entrada.nextInt();
-						if (rmetodo <= 0) {
-							throw new InputLessOrEqualThanZeroException();
-						}
-						personagemDao.excluir(rmetodo);
-						break;
-					} catch (InputMismatchException e) {
-						entrada.next();
-						System.out.println("Escrever somente números!");
-
-					} catch (InputLessOrEqualThanZeroException e) {
-						System.out.println("Valor deve ser maior que zero!");
-					} catch (GildaLessThanOneException e) {
-						System.out
-								.println("Não é possivel realizar a exclusão.\nSua gilda possui apenas um personagem.");
-						break;
-					}
-				}
-
-				break;
-
-			case 2: // 2-Realizar busca do personagem
-				while (true) {
-					try {
-						System.out.println("Digite o numero de identificação do personangem (id): ");
-						rmetodo = entrada.nextInt();
-						if (rmetodo <= 0) {
-							throw new InputLessOrEqualThanZeroException();
-						}
-						System.out.println(personagemDao.buscar(rmetodo));
-						break;
-					} catch (InputMismatchException e) {
-						entrada.next();
-						System.out.println("Escrever somente números!");
-
-					} catch (InputLessOrEqualThanZeroException e) {
-						System.out.println("Valor deve ser maior que zero!");
-					}
-				}
-				break;
-
-			case 3:// 3-listar o(s) personagem(s)
-
-				personagemDao.listar();
-
-				break;
-			case 4:// 4-Alterar o nome do personagem
-				while (true) {
-					try {
-						System.out.println("Digite o numero de identificação do personangem (id): ");
-						rmetodo = entrada.nextInt();
-						if (rmetodo <= 0) {
-							throw new InputLessOrEqualThanZeroException();
-						}
-						break;
-					} catch (InputMismatchException e) {
-						entrada.next();
-						System.out.println("Escrever somente números!");
-
-					} catch (InputLessOrEqualThanZeroException e) {
-						System.out.println("Valor deve ser maior que zero!");
-					}
-				}
-				System.out.println("Digite o novo nome: ");
-				String n = entrada.next();
-
-				personagemDao.alteraNome(rmetodo, n);
-
-				break;
-			case 5: // 5-listar os atributos do personagem
-				while (true) {
-					try {
-						System.out.println("Digite o numero de identificação do personangem (id): ");
-						rmetodo = entrada.nextInt();
-						if (rmetodo <= 0) {
-							throw new InputLessOrEqualThanZeroException();
-						}
-						break;
-					} catch (InputMismatchException e) {
-						entrada.next();
-						System.out.println("Escrever somente números!");
-
-					} catch (InputLessOrEqualThanZeroException e) {
-						System.out.println("Valor deve ser maior que zero!");
-					}
-				}
-				personagemDao.nome(rmetodo);
-				System.out.println(personagemDao.listarAtributos(rmetodo));
-
-				break;
-
-			case 6: // 6-listar os personagens utilizando a classe
-				System.out.println("Digite a classe: ");
-				String c = entrada.next();
-
-				personagemDao.listaClasse(c);
-
-				break;
-
-			case 7: // 7-listar o iventario
-				while (true) {
-					try {
-						System.out.println("Digite o numero de identificação do personangem (id): ");
-						rmetodo = entrada.nextInt();
-						if (rmetodo <= 0) {
-							throw new InputLessOrEqualThanZeroException();
-						}
-						break;
-					} catch (InputMismatchException e) {
-						entrada.next();
-						System.out.println("Escrever somente números!");
-					} catch (InputLessOrEqualThanZeroException e) {
-						System.out.println("Valor deve ser maior que zero!");
-					}
-				}
-				personagemDao.nome(rmetodo);
-				System.out.println(personagemDao.iventario(rmetodo));
-
-				break;
-
-			case 8: // gerar JSON
-				while (true) {
-					try {
-						System.out.println("Gostaria que fosse gravado em um arquivo? (s/n) ");
-						String r = entrada.next();
-						if ((!r.equalsIgnoreCase("s")) && (!r.equalsIgnoreCase("n"))) {
-							throw new SNException();
-						} else if (r.equalsIgnoreCase("s")) {
-							try {
-								System.out.println("Digite o nome do arquivo: ");
-								personagemDao.gravar(personagemDao.json(), entrada.next());
-								System.out.println("Arquivo gerado com o tipo .json!");
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						} else if (r.equalsIgnoreCase("n")) {
-
-							System.out.println("Segue abaixo o JSON gerado:");
-							System.out.println(personagemDao.json());
-
-						}
-						break;
-					} catch (SNException e) {
-						System.out.println("Digite apenas S ou N.");
-					}
-				}
-
-				break;
-			default:
-
-				if (rmetodo > 8 || rmetodo <= 0) {
-					System.out.print("Digite somente numeros entre 1 e 8. \n");
-
-				}
-				break;
-
-			}// switch
-			while (true) {
-				try {
-					System.out.println("Deseja retornar ao menu anterior? S-sim | N-nao:");
-					resposta = entrada.next();
-					if ((!resposta.equalsIgnoreCase("s")) && (!resposta.equalsIgnoreCase("n"))) {
-						throw new SNException();
-					}
-					break;
-				} catch (SNException e) {
-					System.out.println("Digite apenas S ou N.");
-				}
-
-			}
-		} // while
-
-		System.out.println(
-				"Obrigado por testar nossa alfa do nosso protipo D&D!!\nFique antenado para novos updates.\nAté breve!!");
-
-		entrada.close();
-	}// main
+	}
 
 }// class

@@ -199,8 +199,8 @@ public class PersonagemDao {
 
 		while (i < personagem.size()) {
 			if (i == personagem.size() - 1) {
-					json += "{" + personagem.get(i).obj() + ",\"Itens\":[";
-				
+				json += "{" + personagem.get(i).obj() + ",\"Itens\":[";
+
 				int j = 0;
 				while (j < personagem.get(i).getInventario().size()) {
 					if (j == personagem.get(i).getInventario().size() - 1) {
