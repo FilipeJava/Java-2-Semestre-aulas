@@ -30,6 +30,13 @@ public class Atributo {
 		this.nome = nome;
 		this.valor = valor;
 	}
+	
+
+	public Atributo(String nome, int valor) {
+		super();
+		this.nome = nome;
+		this.valor = valor;
+	}
 
 	public int getValor() {
 		return valor;
