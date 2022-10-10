@@ -34,6 +34,14 @@ public class Item {
 		this.quantidade = quantidade;
 		this.descricao = descricao;
 	}
+	
+	
+
+	public Item(String nome, int quantidade) {
+		super();
+		this.nome = nome;
+		this.quantidade = quantidade;
+	}
 
 	public String getNome() {
 		return nome;
