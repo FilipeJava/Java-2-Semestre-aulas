@@ -265,7 +265,8 @@ public class Play {
 				}
 
 				try {
-					System.out.println("Nome: " + personagemDao.buscarPorId(rmetodo).getNome());
+					System.out.println("Nome:"
+							+ " " + personagemDao.buscarPorId(rmetodo).getNome());
 					List<Item> itens = itemDao.listar(rmetodo);
 
 					for (Item i : itens) {
@@ -667,6 +668,8 @@ public class Play {
 
 				}
 				cod++;
+				
+				String jaelsonViado;
 			} while (flag.equalsIgnoreCase("S"));
 
 			// dao de inclusao na lista de personagens
